@@ -5,6 +5,13 @@ The provided repository contains the necessary instructions and information to r
 # Setup
 Clone this repository to your local workspace:
 
-    https://github.com/YUNBLAK/GANN-Genetic-Algorithm-Based-Weights-Fusion-of-Two-Independently-Trained-Neural-Network.git
+    $ git clone https://github.com/YUNBLAK/GANN-Genetic-Algorithm-Based-Weights-Fusion-of-Two-Independently-Trained-Neural-Network.git
 
 # Usage
+For multiple-GANN, just use this command
+
+    $ python multiple-gann.py
+
+For GANN for merging only two models, just use this command
+
+    $ python gann.py
