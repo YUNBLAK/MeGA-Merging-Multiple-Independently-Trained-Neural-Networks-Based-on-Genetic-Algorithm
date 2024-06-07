@@ -5,7 +5,7 @@ The provided repository contains the necessary instructions and information to r
 # Setup
 Clone this repository to your local workspace:
 
-    $ git clone https://github.com/YUNBLAK/GANN-Genetic-Algorithm-Based-Weights-Fusion-of-Two-Independently-Trained-Neural-Network.git
+    $ git clone https://github.com/YUNBLAK/MeGA-Merging-Multiple-Independently-Trained-Neural-Networks-Based-on-Genetic-Algorithm.git
 
 # Independencies
     Numpy == 1.26.2
