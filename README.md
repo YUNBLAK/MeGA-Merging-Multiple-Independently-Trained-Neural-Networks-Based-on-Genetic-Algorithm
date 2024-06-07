@@ -1,6 +1,6 @@
-# GANN: Genetic Algorithm-Based Weight Fusion of Multiple Independently Trained Neural Networks
+# MeGA: Merging Multiple Independently Trained Neural Networks Based on Genetic Algorithm
 
-The provided repository contains the necessary instructions and information to reproduce the findings of our study, "GANN: Genetic Algorithm-Based Weight Fusion of Multiple Independently Trained Neural Networks".
+The provided repository contains the necessary instructions and information to reproduce the findings of our study, "MeGA: Merging Multiple Independently Trained Neural Networks Based on Genetic Algorithm".
 
 # Setup
 Clone this repository to your local workspace:
@@ -14,11 +14,11 @@ Clone this repository to your local workspace:
 # Usage
 For multiple-GANN, just use this command
 
-    $ python multiple-gann.py
+    $ python multiple-mega.py
 
 For GANN for merging only two models, just use this command
 
-    $ python gann.py
+    $ python mega.py
 
 ## Contact
 If you have any question, please contact me. juyyun@cs.stonybrook.edu
