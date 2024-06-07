@@ -7,6 +7,10 @@ Clone this repository to your local workspace:
 
     $ git clone https://github.com/YUNBLAK/GANN-Genetic-Algorithm-Based-Weights-Fusion-of-Two-Independently-Trained-Neural-Network.git
 
+# Independencies
+    Numpy == 1.26.2
+    TensorFlow == 2.15.0
+
 # Usage
 For multiple-GANN, just use this command
 
@@ -15,3 +19,6 @@ For multiple-GANN, just use this command
 For GANN for merging only two models, just use this command
 
     $ python gann.py
+
+## Contact
+If you have any question, please contact me. juyyun@cs.stonybrook.edu
