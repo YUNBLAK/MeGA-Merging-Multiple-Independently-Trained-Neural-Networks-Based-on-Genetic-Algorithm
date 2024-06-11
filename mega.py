@@ -11,6 +11,7 @@ from tensorflow.keras.applications.densenet import DenseNet121
 from tensorflow.keras.applications.densenet import DenseNet169
 import model.resnet as resnets
 import model.vgg as vgg
+from sklearn.model_selection import train_test_split
 
 def xception_model():
     base_model = Xception(weights=None, include_top=False, input_tensor=Input(shape=(32, 32, 3)))
@@ -65,7 +66,12 @@ seed_everything(46)
 
 # Normalize the data
 x_train = x_train.astype('float32') / 255
+original_x_train = x_train 
+original_y_train = y_train
 x_test = x_test.astype('float32') / 255
+
+# Split training data into training and validation sets
+x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.1, random_state=46)
 
 # Define models
 model1 = resnets.ResNet56(input_shape=(32, 32, 3), num_classes=10)
@@ -75,9 +81,18 @@ model2 = resnets.ResNet56(input_shape=(32, 32, 3), num_classes=10)
 model1.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.01), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 model2.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.01), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# Train the models for 1 epoch with batch size 128
-history1 = model1.fit(x_train, y_train, epochs=50, batch_size=256, validation_data=(x_test, y_test))
-history2 = model2.fit(x_train, y_train, epochs=50, batch_size=256, validation_data=(x_test, y_test))
+# Train the models
+history1 = model1.fit(x_train, y_train, epochs=50, batch_size=256, validation_data=(x_val, y_val))
+history2 = model2.fit(x_train, y_train, epochs=50, batch_size=256, validation_data=(x_val, y_val))
+
+print()
+print()
+print()
+print()
+test_loss_fusion, test_acc_fusion = model1.evaluate(x_test, y_test, verbose=2)
+print(f"Model 1 Test Accuracy: {test_acc_fusion}")
+test_loss_fusion, test_acc_fusion = model2.evaluate(x_test, y_test, verbose=2)
+print(f"Model 2 Test Accuracy: {test_acc_fusion}")
 
 # Function to create initial population
 def create_population(size, weights1, weights2):
@@ -142,7 +157,7 @@ best_individual = None
 best_fitness = 0
 
 for generation in range(num_generations):
-    fitnesses = [evaluate_fitness(model_fusion, individual, x_test, y_test) for individual in population]
+    fitnesses = [evaluate_fitness(model_fusion, individual, x_val, y_val) for individual in population]
     
     # Update best individual
     max_fitness = max(fitnesses)
@@ -168,13 +183,3 @@ model_fusion.set_weights(best_individual)
 test_loss_fusion, test_acc_fusion = model_fusion.evaluate(x_test, y_test, verbose=2)
 print(f"Model Fusion Test Accuracy: {test_acc_fusion}")
 
-# Fine-tune the fusion model
-model_fusion.fit(x_train, y_train, epochs=10, batch_size=128, validation_data=(x_test, y_test))
-
-# Evaluate the fusion model
-test_loss_fusion, test_acc_fusion = model_fusion.evaluate(x_test, y_test, verbose=2)
-print(f"Model Fusion Test Accuracy: {test_acc_fusion}")
-
-# Save the fusion model
-model_fusion.save("fusion_model.h5")
-print("Fusion model saved as fusion_model.h5")
