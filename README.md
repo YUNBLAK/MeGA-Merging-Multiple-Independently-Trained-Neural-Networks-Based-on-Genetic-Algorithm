@@ -7,7 +7,7 @@ Clone this repository to your local workspace:
 
     $ git clone https://github.com/YUNBLAK/MeGA-Merging-Multiple-Independently-Trained-Neural-Networks-Based-on-Genetic-Algorithm.git
 
-# Independencies
+# Dependencies
     Numpy == 1.26.2
     TensorFlow == 2.15.0
 
